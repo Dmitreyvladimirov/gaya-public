@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaya — Design Kit</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green:      #688662;
+    --olive:      #454411;
+    --amber:      #C07A35;
+    --gold:       #E8B030;
+    --terracotta: #C46A4A;
+    --white:      #FFFFFF;
+    --off-white:  #F5F2EE;
+    --light-gray: #E8E4DF;
+    --dark-text:  #1C1C1A;
+    --mid-text:   #5A5754;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--off-white);
+    color: var(--dark-text);
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--olive);
+    padding: 64px 48px 48px;
+    display: flex;
+    align-items: flex-end;
+    gap: 32px;
+  }
+  .site-header img {
+    height: 72px;
+    width: auto;
+  }
+  .site-header-text h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+  .site-header-text p {
+    color: rgba(255,255,255,0.55);
+    font-size: 14px;
+    margin-top: 4px;
+  }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 1100px; margin: 0 auto; padding: 64px 32px 120px; }
+
+  .section { margin-bottom: 80px; }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--mid-text);
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--light-gray);
+  }
+
+  /* ── LOGO GRID ── */
+  .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .logo-card {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--light-gray);
+  }
+  .logo-card-img {
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+  }
+  .logo-card-img img { max-width: 100%; max-height: 120px; object-fit: contain; }
+  .logo-card-meta {
+    background: #fff;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--mid-text);
+  }
+  .logo-card-meta strong { display: block; color: var(--dark-text); font-size: 14px; margin-bottom: 2px; }
+
+  /* ── COLOR PALETTE ── */
+  .color-section-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--mid-text);
+    margin: 32px 0 16px;
+  }
+  .color-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .color-chip {
+    width: 160px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.08);
+    background: #fff;
+  }
+  .color-chip-swatch {
+    height: 80px;
+    width: 100%;
+  }
+  .color-chip-info {
+    padding: 10px 12px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .color-chip-info .color-name {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--dark-text);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .color-chip-info .color-hex {
+    font-family: monospace;
+    color: var(--mid-text);
+    font-size: 12px;
+  }
+  .color-chip-info .color-use {
+    color: var(--mid-text);
+    font-size: 11px;
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  .type-examples { display: flex; flex-direction: column; gap: 24px; }
+  .type-row {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px 28px;
+    border: 1px solid var(--light-gray);
+    display: flex;
+    align-items: baseline;
+    gap: 32px;
+  }
+  .type-meta {
+    width: 140px;
+    flex-shrink: 0;
+    font-size: 12px;
+    color: var(--mid-text);
+    line-height: 1.6;
+  }
+  .type-meta strong { display: block; color: var(--dark-text); font-weight: 600; }
+  .type-sample { flex: 1; }
+
+  /* ── COMBINATIONS ── */
+  .combo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .combo-card {
+    border-radius: 12px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0,0,0,0.07);
+    position: relative;
+    overflow: hidden;
+  }
+  .combo-card img { max-height: 60px; max-width: 80%; object-fit: contain; }
+  .combo-label {
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+    font-size: 10px;
+    opacity: 0.5;
+    font-family: monospace;
+  }
+
+  /* ── VOICE ── */
+  .voice-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .voice-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px 22px;
+    border: 1px solid var(--light-gray);
+  }
+  .voice-card h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: var(--green);
+  }
+  .voice-card p { font-size: 14px; color: var(--mid-text); }
+
+  /* ── SIZES ── */
+  .sizes-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--light-gray);
+  }
+  .sizes-table th {
+    text-align: left;
+    padding: 12px 16px;
+    background: var(--off-white);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--mid-text);
+    border-bottom: 1px solid var(--light-gray);
+  }
+  .sizes-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--light-gray);
+    color: var(--dark-text);
+  }
+  .sizes-table tr:last-child td { border-bottom: none; }
+  .sizes-table td:nth-child(3) { font-family: monospace; font-size: 13px; color: var(--mid-text); }
+
+  /* ── TODO ── */
+  .todo-list {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px 24px;
+    border: 1px solid var(--light-gray);
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .todo-list li {
+    font-size: 14px;
+    color: var(--mid-text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .todo-list li::before {
+    content: '';
+    width: 16px; height: 16px;
+    border-radius: 4px;
+    border: 2px solid var(--light-gray);
+    flex-shrink: 0;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: var(--light-gray);
+    color: var(--mid-text);
+    margin-left: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .tag.todo { background: #FEF3C7; color: #92400E; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <img src="Gaya visual/Gaya Logo/1.png" alt="Gaya logo">
+  <div class="site-header-text">
+    <h1>Design Kit</h1>
+    <p>Brand reference — updated June 2026</p>
+  </div>
+</header>
+
+<div class="page">
+
+  <!-- LOGO VARIANTS -->
+  <div class="section">
+    <div class="section-title">Logo Variants</div>
+    <div class="logo-grid">
+      <div class="logo-card">
+        <div class="logo-card-img" style="background:#fff;">
+          <img src="Gaya visual/Gaya Logo/1.png" alt="">
+        </div>
+        <div class="logo-card-meta"><strong>Default</strong>White background · documents, UI</div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-card-img" style="background:#454411;">
+          <img src="Gaya visual/Gaya Logo/2.png" alt="">
+        </div>
+        <div class="logo-card-meta"><strong>Dark Olive</strong>#454411 · dark mode, night events</div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-card-img" style="background:#688662;">
+          <img src="Gaya visual/Gaya Logo/3.png" alt="">
+        </div>
+        <div class="logo-card-meta"><strong>Sage Green</strong>#688662 · headers, social covers</div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-card-img" style="background:#C07A35;">
+          <img src="Gaya visual/Gaya Logo/4.png" alt="">
+        </div>
+        <div class="logo-card-meta"><strong>Amber</strong>#C07A35 · warm backgrounds</div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-card-img" style="background:#C46A4A;">
+          <img src="Gaya visual/Gaya Logo/5.png" alt="">
+        </div>
+        <div class="logo-card-meta"><strong>Terracotta</strong>#C46A4A · warm accent</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COLOR PALETTE -->
+  <div class="section">
+    <div class="section-title">Color Palette</div>
+
+    <div class="color-section-label">Primary</div>
+    <div class="color-row">
+      <div class="color-chip">
+        <div class="color-chip-swatch" style="background:#688662;"></div>
+        <div class="color-chip-info">
+          <span class="color-name">Sage Green</span>
+          <span class="color-hex">#688662</span>
+          <span class="color-use">Brand color, logotype, UI</span>
+        </div>
+      </div>
+      <div class="color-chip">
+        <div class="color-chip-swatch" style="background:#454411;"></div>
+        <div class="color-chip-info">
+          <span class="color-name">Dark Olive</span>
+          <span class="color-hex">#454411</span>
+          <span class="color-use">Dark backgrounds, emphasis</span>
+        </div>
+      </div>
+      <div class="color-chip">
+        <div class="color-chip-swatch" style="background:#FFFFFF; border-bottom:1px solid #E8E4DF;"></div>
+        <div class="color-chip-info">
+          <span class="color-name">White</span>
+          <span class="color-hex">#FFFFFF</span>
+          <span class="color-use">Backgrounds, text on dark</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="color-section-label" style="margin-top:28px;">Accent</div>
+    <div class="color-row">
+      <div class="color-chip">
+        <div class="color-chip-swatch" style="background:#C07A35;"></div>
+        <div class="color-chip-info">
+          <span class="color-name">Amber</span>
+          <span class="color-hex">#C07A35</span>
+          <span class="color-use">CTA, highlights, icon body</span>
+        </div>
+      </div>
+      <div class="color-chip">
+        <div class="color-chip-swatch" style="background:#E8B030;"></div>
+        <div class="color-chip-info">
+          <span class="color-name">Yellow Gold</span>
+          <span class="color-hex">#E8B030</span>
+          <span class="color-use">Icon head, badges</span>
+        </div>
+      </div>
+      <div class="color-chip">
+        <div class="color-chip-swatch" style="background:#C46A4A;"></div>
+        <div class="color-chip-info">
+          <span class="color-name">Terracotta</span>
+          <span class="color-hex">#C46A4A</span>
+          <span class="color-use">Warm backgrounds, social posts</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="color-section-label" style="margin-top:28px;">Neutral</div>
+    <div class="color-row">
+      <div class="color-chip">
+        <div class="color-chip-swatch" style="background:#F5F2EE; border-bottom:1px solid #E8E4DF;"></div>
+        <div class="color-chip-info">
+          <span class="color-name">Off-white</span>
+          <span class="color-hex">#F5F2EE</span>
+          <span class="color-use">Page backgrounds</span>
+        </div>
+      </div>
+      <div class="color-chip">
+        <div class="color-chip-swatch" style="background:#E8E4DF;"></div>
+        <div class="color-chip-info">
+          <span class="color-name">Light Gray</span>
+          <span class="color-hex">#E8E4DF</span>
+          <span class="color-use">Dividers, borders</span>
+        </div>
+      </div>
+      <div class="color-chip">
+        <div class="color-chip-swatch" style="background:#1C1C1A;"></div>
+        <div class="color-chip-info">
+          <span class="color-name">Dark Text</span>
+          <span class="color-hex">#1C1C1A</span>
+          <span class="color-use">Body copy, headings</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <div class="section">
+    <div class="section-title">Typography <span class="tag todo">confirm font with designer</span></div>
+    <div class="type-examples">
+      <div class="type-row">
+        <div class="type-meta"><strong>H1</strong>Fraunces 700<br>40–48px</div>
+        <div class="type-sample" style="font-family:'Fraunces',serif; font-size:44px; font-weight:700; line-height:1.15;">Building your future in Israel.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><strong>H2</strong>Fraunces 600<br>28–32px</div>
+        <div class="type-sample" style="font-family:'Fraunces',serif; font-size:30px; font-weight:600;">Welcome to Cohort 1</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><strong>H3</strong>Fraunces 600<br>20–24px</div>
+        <div class="type-sample" style="font-family:'Fraunces',serif; font-size:22px; font-weight:600;">Program Overview</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><strong>Body</strong>Inter 400<br>16px</div>
+        <div class="type-sample" style="font-size:16px; line-height:1.7;">Gaya is a community for tech professionals who have recently made aliyah. We help you build meaningful connections and navigate the Israeli tech ecosystem.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><strong>Label</strong>Inter 500<br>13px</div>
+        <div class="type-sample" style="font-size:13px; font-weight:500; color:#5A5754; text-transform:uppercase; letter-spacing:1px;">Cohort 1 · Tel Aviv · June 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMAGE SPECS -->
+  <div class="section">
+    <div class="section-title">Image Specs by Platform</div>
+
+    <div class="color-section-label">Eventbrite</div>
+    <table class="sizes-table" style="margin-bottom:24px;">
+      <thead>
+        <tr><th>Slot</th><th>Recommended size</th><th>Ratio</th><th>Max file</th><th>Format</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Event cover image</td><td>1880 × 940px</td><td>2:1</td><td>10MB</td><td>JPEG, PNG</td><td>Main event page header · <strong>ready: 1_banner.png</strong></td></tr>
+        <tr><td>Email — logo</td><td>150 × 75px</td><td>2:1</td><td>1MB</td><td>JPEG, PNG</td><td>Appears above email content</td></tr>
+        <tr><td>Email — header image</td><td>2160 × 1080px</td><td>2:1</td><td>1MB</td><td>JPEG, PNG</td><td>Appears in email body, above text</td></tr>
+        <tr><td>Email — background image</td><td>min 1200 × 600px</td><td>2:1</td><td>1MB</td><td>JPEG, PNG</td><td>Behind all email content; replaces border color; tiles if too small</td></tr>
+      </tbody>
+    </table>
+
+    <div class="color-section-label">Airtable Forms</div>
+    <table class="sizes-table" style="margin-bottom:24px;">
+      <thead>
+        <tr><th>Slot</th><th>Recommended</th><th>Minimum</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Form cover image</td><td>1800 × 512px</td><td>800 × 240px</td><td>Renders at 240px tall; width = browser width</td></tr>
+        <tr><td>Form logo</td><td>200 × 120px max</td><td>—</td><td>Larger images are downscaled automatically</td></tr>
+      </tbody>
+    </table>
+
+    <div class="color-section-label">Social Media</div>
+    <table class="sizes-table">
+      <thead>
+        <tr><th>Platform</th><th>Format</th><th>Size</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Luma event cover</td><td>PNG / JPEG</td><td>1880 × 940px</td><td>Ready → 1_banner.png</td></tr>
+        <tr><td>Instagram post</td><td>PNG</td><td>1080 × 1080px</td><td>Square</td></tr>
+        <tr><td>Instagram story</td><td>PNG</td><td>1080 × 1920px</td><td>9:16</td></tr>
+        <tr><td>LinkedIn post</td><td>PNG</td><td>1200 × 628px</td><td>1.91:1</td></tr>
+        <tr><td>WhatsApp sticker</td><td>PNG</td><td>512 × 512px</td><td>Transparent bg preferred</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- POST DESIGN PATTERNS -->
+  <div class="section">
+    <div class="section-title">Post Design Patterns</div>
+
+    <div class="color-section-label">Цветовые схемы постов</div>
+    <div class="combo-grid" style="margin-bottom:32px;">
+      <div class="combo-card" style="background:#688662; flex-direction:column; gap:6px;">
+        <span style="color:#fff; font-family:'Fraunces',serif; font-size:15px; font-weight:700;">Green</span>
+        <span style="color:#E8B030; font-size:11px; font-weight:600;">акцент Gold</span>
+        <span class="combo-label" style="color:rgba(255,255,255,0.4);">#688662</span>
+      </div>
+      <div class="combo-card" style="background:#F5F2EE; flex-direction:column; gap:6px; border:1px solid #E8E4DF;">
+        <span style="color:#1C1C1A; font-family:'Fraunces',serif; font-size:15px; font-weight:700;">Light</span>
+        <span style="color:#C07A35; font-size:11px; font-weight:600;">акцент Amber</span>
+        <span class="combo-label" style="color:#aaa;">#F5F2EE</span>
+      </div>
+      <div class="combo-card" style="background:#454411; flex-direction:column; gap:6px;">
+        <span style="color:#fff; font-family:'Fraunces',serif; font-size:15px; font-weight:700;">Dark</span>
+        <span style="color:#E8B030; font-size:11px; font-weight:600;">акцент Gold</span>
+        <span class="combo-label" style="color:rgba(255,255,255,0.3);">#454411</span>
+      </div>
+      <div class="combo-card" style="background:linear-gradient(135deg,rgba(104,134,98,0.85),rgba(104,134,98,0.6)), url() center/cover; flex-direction:column; gap:6px; background-color:#688662;">
+        <span style="color:#fff; font-family:'Fraunces',serif; font-size:15px; font-weight:700;">Photo</span>
+        <span style="color:#E8B030; font-size:11px; font-weight:600;">фото + оверлей</span>
+      </div>
+    </div>
+
+    <div class="color-section-label">Типографика заголовков</div>
+    <div style="background:#688662; border-radius:12px; padding:28px 32px; margin-bottom:24px;">
+      <div style="font-family:'Fraunces',serif; font-size:32px; font-weight:700; line-height:1.2; margin-bottom:12px;">
+        <span style="color:#fff;">The Network </span><span style="color:#E8B030;">Olim Deserve</span>
+      </div>
+      <div style="font-family:'Fraunces',serif; font-size:28px; font-weight:700; line-height:1.2; margin-bottom:12px;">
+        <span style="color:#fff;">Find your people.<br></span><span style="color:#E8B030;">Build your future.</span>
+      </div>
+      <div style="font-family:'Fraunces',serif; font-size:28px; font-weight:700; line-height:1.2;">
+        <span style="color:#fff;">Gaya </span><span style="color:#E8B030;">Meet-Up</span>
+      </div>
+      <p style="color:rgba(255,255,255,0.55); font-size:12px; margin-top:16px;">Приём: нейтральное слово (белый) + ключевое слово (Gold #E8B030)</p>
+    </div>
+
+    <div class="color-section-label">Иконки</div>
+    <div style="background:#fff; border-radius:12px; padding:24px 28px; border:1px solid var(--light-gray); margin-bottom:24px; display:flex; gap:32px; align-items:center; flex-wrap:wrap;">
+      <div style="text-align:center;">
+        <div style="width:72px;height:72px;border-radius:50%;background:#688662;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        </div>
+        <span style="font-size:11px;color:var(--mid-text);">Sage Green bg</span>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:72px;height:72px;border-radius:50%;background:#E8B030;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <span style="font-size:11px;color:var(--mid-text);">Gold bg</span>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:72px;height:72px;border-radius:50%;background:#F5F0E8;display:flex;align-items:center;justify-content:center;margin:0 auto 8px; border:1px solid #E8E4DF;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#688662" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <span style="font-size:11px;color:var(--mid-text);">Light bg</span>
+      </div>
+      <div style="font-size:13px; color:var(--mid-text); max-width:220px; line-height:1.6;">
+        Стиль: <strong>thin outline</strong>, stroke ~1.5px<br>
+        Форма: круглый фон<br>
+        Никаких эмодзи — только SVG/line icons
+      </div>
+    </div>
+
+    <div class="color-section-label">CTA-кнопки</div>
+    <div style="background:#fff; border-radius:12px; padding:24px 28px; border:1px solid var(--light-gray); margin-bottom:24px; display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
+      <button style="background:#454411;color:#fff;border:none;padding:12px 28px;border-radius:999px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;cursor:default;">Apply Today</button>
+      <button style="background:#E8B030;color:#1C1C1A;border:none;padding:12px 28px;border-radius:999px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;cursor:default;">Join the Community</button>
+      <div style="width:44px;height:44px;border-radius:50%;background:#E8B030;display:flex;align-items:center;justify-content:center;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1C1C1A" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </div>
+
+    <div class="color-section-label">Структура футера</div>
+    <div style="background:#C46A4A; border-radius:12px; padding:20px 28px; display:flex; align-items:center; gap:32px; flex-wrap:wrap;">
+      <img src="Gaya visual/Gaya Logo/5.png" style="height:36px; width:auto;">
+      <div style="color:rgba(255,255,255,0.8); font-size:13px; display:flex; gap:24px; flex-wrap:wrap;">
+        <span>✉ info@gayaolim.org</span>
+        <span>in Gaya | The Professional Network for Olim</span>
+        <span>@ @gaya.olim</span>
+      </div>
+      <div style="margin-left:auto; color:rgba(255,255,255,0.5); font-size:11px;">Powered by Nevo · Sponsored by partners</div>
+    </div>
+  </div>
+
+  <!-- VOICE & TONE -->
+  <div class="section">
+    <div class="section-title">Voice & Tone</div>
+    <div class="voice-grid">
+      <div class="voice-card">
+        <h4>Warm & direct</h4>
+        <p>No corporate speak. Write like you're talking to a colleague, not presenting to investors.</p>
+      </div>
+      <div class="voice-card">
+        <h4>Concrete</h4>
+        <p>Use numbers and specifics. "75 members" beats "a growing community".</p>
+      </div>
+      <div class="voice-card">
+        <h4>Insider</h4>
+        <p>Speak to people who get the aliyah experience — the challenges and the opportunity.</p>
+      </div>
+      <div class="voice-card">
+        <h4>Language</h4>
+        <p>English primary. Hebrew for local community posts and WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPEN QUESTIONS -->
+  <div class="section">
+    <div class="section-title">Open Questions</div>
+    <ul class="todo-list">
+      <li>Confirm exact logotype font name with designer</li>
+      <li>Define secondary typeface (Hebrew support needed?)</li>
+      <li>Establish icon and illustration style</li>
+      <li>Finalize dark mode palette</li>
+      <li>Motion / animation guidelines (future)</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>

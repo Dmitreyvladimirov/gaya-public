@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaya Cohort 1 — Kickoff Event</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #F5EFE6;
+    color: #2C1810;
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Sandy wave decoration */
+  .wave-top {
+    position: absolute;
+    top: 0; right: 0;
+    width: 280px; height: 180px;
+    background: #E8D5B7;
+    border-radius: 0 0 0 100%;
+    opacity: 0.6;
+  }
+
+  .wave-bottom {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 220px; height: 140px;
+    background: #E8D5B7;
+    border-radius: 0 100% 0 0;
+    opacity: 0.5;
+  }
+
+  .content { position: relative; z-index: 1; }
+
+  /* Header */
+  .header { margin-bottom: 48px; }
+
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #7B3F2E;
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 1.0;
+    color: #7B3F2E;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #5A8A8A;
+    margin-top: 16px;
+  }
+
+  /* Info block */
+  .info-block {
+    background: white;
+    border-radius: 16px;
+    padding: 32px 36px;
+    margin-bottom: 36px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .info-item {}
+  .info-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #9B8878;
+    margin-bottom: 4px;
+  }
+  .info-value {
+    font-size: 15px;
+    font-weight: 600;
+    color: #2C1810;
+    line-height: 1.4;
+  }
+  .info-value.tbc {
+    color: #9B8878;
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  /* Section */
+  .section { margin-bottom: 36px; }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #7B3F2E;
+    margin-bottom: 20px;
+  }
+
+  /* Agenda */
+  .agenda-item {
+    display: flex;
+    gap: 24px;
+    padding: 16px 0;
+    border-bottom: 1px solid #E8D5B7;
+  }
+  .agenda-item:last-child { border-bottom: none; }
+
+  .time {
+    font-size: 13px;
+    font-weight: 700;
+    color: #7B3F2E;
+    min-width: 72px;
+    padding-top: 2px;
+  }
+
+  .agenda-text {
+    font-size: 14px;
+    color: #2C1810;
+    line-height: 1.5;
+  }
+
+  .agenda-text .note {
+    font-size: 12px;
+    color: #9B8878;
+    margin-top: 2px;
+  }
+
+  /* Packing list */
+  .pack-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .pack-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #2C1810;
+  }
+
+  .pack-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #7B3F2E;
+    flex-shrink: 0;
+  }
+
+  /* Getting there */
+  .transport-block {
+    background: #EFE8DC;
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 16px;
+  }
+
+  .transport-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #7B3F2E;
+    margin-bottom: 8px;
+  }
+
+  .transport-text {
+    font-size: 14px;
+    color: #2C1810;
+    line-height: 1.6;
+  }
+
+  /* Logo */
+  .logo {
+    margin-top: 48px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: #1A5F7A;
+  }
+
+  .logo-tagline {
+    font-size: 11px;
+    color: #5A8A8A;
+    letter-spacing: 0.5px;
+  }
+
+  .divider {
+    width: 40px;
+    height: 2px;
+    background: #7B3F2E;
+    margin: 32px 0;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="wave-top"></div>
+  <div class="wave-bottom"></div>
+
+  <div class="content">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="tag">Gaya Tech · Cohort 1</div>
+      <h1>Kickoff<br>Event</h1>
+      <div class="subtitle">Where your Israeli tech journey begins</div>
+      <p style="margin-top:20px; font-size:15px; line-height:1.7; color:#4A3728; max-width:520px;">
+        Your journey as a Gaya member starts here. Join us for a full-day kickoff gathering — a chance to meet your cohort, connect with fellow Olim in tech, and set the tone for the year ahead.
+      </p>
+    </div>
+
+    <!-- Key info -->
+    <div class="info-block">
+      <div class="info-item">
+        <div class="info-label">Date</div>
+        <div class="info-value">Thursday, July 2, 2026</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Time</div>
+        <div class="info-value">08:30 – 16:00</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Location</div>
+        <div class="info-value">Profimex<br>Zarhin St 10, Ra'anana</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Shuttle</div>
+        <div class="info-value">From Herzliya Station<br><span class="tbc">Departure 8:00 AM (TBC)</span></div>
+      </div>
+    </div>
+
+    <!-- Agenda -->
+    <div class="section">
+      <div class="section-title">Day Agenda</div>
+
+      <div class="agenda-item">
+        <div class="time">08:00</div>
+        <div class="agenda-text">
+          Shuttle departs from Herzliya Train Station
+          <div class="note">Exact pickup details to be confirmed</div>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="time">08:30</div>
+        <div class="agenda-text">Doors open — Welcome & Registration</div>
+      </div>
+      <div class="agenda-item">
+        <div class="time">TBA</div>
+        <div class="agenda-text">
+          Full agenda coming soon
+          <div class="note">Sessions, workshops & networking — details to follow</div>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="time">16:00</div>
+        <div class="agenda-text">End of event</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Getting there -->
+    <div class="section">
+      <div class="section-title">Getting There</div>
+
+      <div class="transport-block">
+        <div class="transport-title">🚌 Shuttle Service</div>
+        <div class="transport-text">
+          A free shuttle will depart from <strong>Herzliya Train Station</strong> at <strong>8:00 AM</strong> and return after the event.<br>
+          If you requested shuttle in your welcome form — you're all set. Exact pickup time and spot to be confirmed soon.
+        </div>
+      </div>
+
+      <div class="transport-block">
+        <div class="transport-title">📍 Venue Address</div>
+        <div class="transport-text">
+          <strong>Profimex</strong><br>
+          Zarhin St 10, Ra'anana<br><br>
+          Parking available on site.
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- What to bring -->
+    <div class="section">
+      <div class="section-title">What to Bring</div>
+      <div class="pack-grid">
+        <div class="pack-item"><div class="pack-dot"></div>Laptop</div>
+        <div class="pack-item"><div class="pack-dot"></div>Laptop charger</div>
+        <div class="pack-item"><div class="pack-dot"></div>Portable charger</div>
+        <div class="pack-item"><div class="pack-dot"></div>Water bottle</div>
+        <div class="pack-item"><div class="pack-dot"></div>Notebook & pen</div>
+        <div class="pack-item"><div class="pack-dot"></div>Comfortable clothes</div>
+      </div>
+    </div>
+
+    <!-- Logo -->
+    <div class="logo">
+      <div>
+        <div class="logo-mark">Nêvo</div>
+        <div class="logo-tagline">Elevating Olim in Tech</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
