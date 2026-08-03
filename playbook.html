@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gaya — Team Playbook</title>
-<meta name="description" content="Step-by-step instructions for Gaya's Airtable/Zoom/Calendar/Brevo automation, for Shajar, the community manager and Abby.">
+<meta name="description" content="Step-by-step instructions for running Gaya's community operations -- Airtable, Zoom, Calendar, and email automation.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%236B8F5B%22/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -76,6 +76,15 @@
     border-bottom:1px solid var(--line);
   }
   header.top img{height:30px; width:auto; display:block}
+  header.top img.logo-dark{display:none; border-radius:6px}
+  @media (prefers-color-scheme: dark){
+    header.top img.logo-light{display:none}
+    header.top img.logo-dark{display:block}
+  }
+  :root[data-theme="dark"] header.top img.logo-light{display:none}
+  :root[data-theme="dark"] header.top img.logo-dark{display:block}
+  :root[data-theme="light"] header.top img.logo-light{display:block}
+  :root[data-theme="light"] header.top img.logo-dark{display:none}
   header.top .title{font-family:'Sora'; font-weight:700; font-size:1.05rem; color:var(--sage-deep)}
   header.top .subtitle{font-size:.8rem; color:var(--ink-soft)}
   .top-spacer{flex:1}
@@ -88,8 +97,13 @@
   .search-wrap svg{position:absolute; left:10px; top:50%; transform:translateY(-50%); opacity:.5; width:15px; height:15px}
   .theme-toggle{
     border:1px solid var(--line); background:var(--cream); color:var(--ink);
-    border-radius:8px; padding:6px 10px; font-size:.8rem; cursor:pointer; font-family:'Inter';
+    border-radius:8px; padding:6px 10px; font-size:.8rem; cursor:pointer; font-family:'Inter'; margin-left:10px;
   }
+  .backlink{
+    font-size:.8rem; text-decoration:none; color:var(--ink-soft); border:1px solid var(--line);
+    border-radius:999px; padding:6px 14px; white-space:nowrap;
+  }
+  .backlink:hover{color:var(--sage-dark); border-color:var(--sage)}
   .theme-toggle:focus-visible, .navlink:focus-visible, a:focus-visible, button:focus-visible, input:focus-visible {
     outline:2px solid var(--sage); outline-offset:2px;
   }
@@ -214,10 +228,10 @@
   }
   .badge.live{background:var(--sage-tint); color:var(--sage-dark)}
   .badge.planned{background:var(--terracotta-tint); color:var(--terracotta)}
-  footer.contact{
-    max-width:1180px; margin:0 auto; padding:30px 28px 60px 288px;
+  footer.credit{
+    max-width:1180px; margin:0 auto; padding:30px 28px 50px 288px;
+    font-size:.78rem; color:var(--ink-soft); opacity:.6;
   }
-  footer.contact .card{max-width:520px}
   mark{background:var(--mustard); color:#2A2100; border-radius:3px; padding:0 2px}
   .hidden-by-search{display:none !important}
 
@@ -233,7 +247,7 @@
     }
     nav.side.open{transform:translateX(0); box-shadow:8px 0 24px rgba(0,0,0,.15)}
     main{padding:24px 18px 60px}
-    footer.contact{padding-left:18px}
+    footer.credit{padding-left:18px}
   }
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto}
@@ -245,16 +259,18 @@
 
 <header class="top">
   <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button>
-  <img src="assets/gaya-logo.png" alt="Gaya">
+  <img class="logo-light" src="assets/gaya-logo.png" alt="Gaya">
+  <img class="logo-dark" src="assets/gaya-logo-dark.png" alt="Gaya">
   <div>
     <div class="title">Team Playbook</div>
-    <div class="subtitle">For Shajar, the community manager &amp; Abby — updated Aug 3, 2026</div>
+    <div class="subtitle">Used to manage Gaya's community — updated Aug 3, 2026</div>
   </div>
   <div class="top-spacer"></div>
   <div class="search-wrap">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
     <input id="searchBox" type="search" placeholder="Search the playbook…" aria-label="Search the playbook">
   </div>
+  <a class="backlink" href="tech.html">Technical reference →</a>
   <button class="theme-toggle" id="themeToggle" type="button">🌓 Theme</button>
 </header>
 
@@ -289,7 +305,7 @@
     <p><b>What it is:</b> the database and main working tool for the team. Everything about participants lives here.</p>
     <p><b>Why:</b> a structured alternative to Excel/Sheets — buttons, filtered views, forms, and automatic links between tables.</p>
     <p><b>Stores:</b> Applications, Events &amp; Attendance, Survey Responses, Email Templates.</p>
-    <p><b>Who uses it:</b> Shajar, the community manager, Abby — daily. Dima — setup &amp; support.</p>
+    <p><b>Who uses it:</b> the team — daily. The developer — setup &amp; support.</p>
     <p><b>Login:</b> airtable.com → <code>info@gayaolim.org</code> · <b>Cost:</b> ~$20–30/mo (Team plan, ~50% NGO discount)</p>
   </div>
 
@@ -298,7 +314,7 @@
     <p><b>What it is:</b> where participants register for some events. They get a link and sign up there.</p>
     <p><b>Why:</b> registration, QR codes for check-in, automatic confirmation emails.</p>
     <p><b>Automatic:</b> a registration syncs into Airtable via webhook within 1–2 minutes.</p>
-    <p><b>Who uses it:</b> The community manager creates events. Abby uses the Eventbrite app for QR check-in on event day.</p>
+    <p><b>Who uses it:</b> The team creates events and uses the Eventbrite app for QR check-in on event day.</p>
     <p><b>Login:</b> eventbrite.com → <code>info@gayaolim.org</code> · <b>Cost:</b> $0 (free events)</p>
   </div>
 
@@ -314,7 +330,7 @@
   <div class="card">
     <h4>OpenAI <span class="mono">— AI scoring</span></h4>
     <p><b>What it is:</b> reads applicant answers and scores them across 4 criteria.</p>
-    <p><b>Why:</b> instead of Shajar manually reading hundreds of applications, the AI does the first pass in 3–5 minutes — Shajar reviews and decides.</p>
+    <p><b>Why:</b> instead of reading hundreds of applications by hand, the AI does the first pass in 3–5 minutes — a team member reviews the results and decides.</p>
     <p>The team never interacts with it directly — it runs when <span class="btnpill">⚡ Score Applicants</span> is clicked.</p>
     <p><b>Cost:</b> ~$1–2 per cohort of 150 applicants.</p>
   </div>
@@ -322,18 +338,21 @@
   <div class="card">
     <h4>Railway <span class="mono">— the server</span></h4>
     <p><b>What it is:</b> an always-on background server. It receives Airtable button clicks/webhooks and runs the Telegram bot.</p>
-    <p>The team doesn't interact with it directly — this is Dima's tool. The community manager has view-only access to check status.</p>
-    <p><b>Cost:</b> ~$5/mo, paid by Dima (included in support retainer)</p>
+    <p>The team doesn't interact with it directly — it's managed by the developer. The team has view-only access to check status.</p>
+    <p><b>Cost:</b> ~$5/mo (included in the support retainer)</p>
     <div class="tblwrap">
       <table>
         <caption>Secret variables stored in Railway — never shared, never pasted into a spreadsheet or email</caption>
         <tr><th>Variable</th><th>What it is</th></tr>
         <tr><td class="field">AIRTABLE_TOKEN</td><td>API key to access the Airtable database</td></tr>
         <tr><td class="field">AIRTABLE_BASE_ID</td><td>Address of the specific Airtable base</td></tr>
-        <tr><td class="field">EVENTBRITE_PRIVATE_TOKEN</td><td>API key for Eventbrite</td></tr>
+        <tr><td class="field">PRIVATE_TOKEN</td><td>API key for Eventbrite</td></tr>
+        <tr><td class="field">EVENTBRITE_ORG_ID</td><td>Gaya's organization ID in Eventbrite</td></tr>
+        <tr><td class="field">AIRTABLE_TABLE_ID / _EVENTS_ / _ATTENDANCE_</td><td>Which Airtable table each part of the code reads/writes</td></tr>
         <tr><td class="field">OPENAI_API_KEY</td><td>API key for AI scoring</td></tr>
         <tr><td class="field">BREVO_API_KEY</td><td>API key for email delivery</td></tr>
-        <tr><td class="field">TELEGRAM_BOT_TOKEN</td><td>Telegram bot key (alerts to Dima)</td></tr>
+        <tr><td class="field">TELEGRAM_BOT_TOKEN</td><td>Telegram bot key (alerts to the developer)</td></tr>
+        <tr><td class="field">FLASK_SECRET</td><td>The "Railway API Secret" every Airtable button script needs — authenticates button clicks</td></tr>
         <tr><td class="field">ZOOM_*</td><td>Zoom Server-to-Server OAuth credentials</td></tr>
       </table>
     </div>
@@ -347,7 +366,7 @@
       <tr><td>Eventbrite</td><td>Gaya</td><td>$0</td></tr>
       <tr><td>Brevo</td><td>Gaya</td><td>$0 (≤300 emails/day)</td></tr>
       <tr><td>OpenAI</td><td>Gaya</td><td>~$1–2/cohort</td></tr>
-      <tr><td>Railway</td><td>Dima</td><td>~$5/mo</td></tr>
+      <tr><td>Railway</td><td>Developer</td><td>~$5/mo</td></tr>
       <tr><td><b>Total</b></td><td></td><td><b>~$25–35/mo</b></td></tr>
     </table>
   </div>
@@ -365,7 +384,7 @@
 
 <section class="doc" id="s1">
   <h2><span class="num">01</span> New Cohort</h2>
-  <p class="lede">Every new cohort needs three things: a form, a set of views, and a message to Dima.</p>
+  <p class="lede">Every new cohort needs three things: a form, a set of views, and a message to the developer.</p>
 
   <h3>Step 1 — Get the form ready</h3>
   <div class="note">✅ Fastest path: <b>duplicate the previous cohort's form</b>, don't build one from scratch.</div>
@@ -386,7 +405,7 @@
     <li>Find the most recent cohort's form → <b>Duplicate</b></li>
     <li>Rename it <code>Gaya Application — Cohort N (YYYY)</code></li>
     <li>Update the <span class="field">Source Form</span> field's prefilled default so new submissions tag the right cohort (see rule below)</li>
-    <li>Message Dima with the cohort name — he generates the prefilled link</li>
+    <li>Message the developer with the cohort name — they'll generate the prefilled link</li>
     <li>Share <b>only the prefilled link</b> with applicants, never the base form URL</li>
   </ol>
   <div class="callout"><span class="icon">⚠️</span><div><b>No Google Forms.</b> Airtable Form only.</div></div>
@@ -398,14 +417,14 @@
       <li>Name it <code>Gaya Application — Cohort N (YYYY)</code></li>
       <li>Add the standard fields: Full Name*, Email*, Age, City, Country of Origin, Years Since Aliyah, Phone, LinkedIn, Company/Role, the three open questions, Event Availability, Commitment Confirmed*</li>
       <li>Add the <span class="field">Source Form</span> field (see rule below)</li>
-      <li>Message Dima with the cohort name — he generates the prefilled link</li>
+      <li>Message the developer with the cohort name — they'll generate the prefilled link</li>
     </ol>
   </details>
 
   <h3>Why every form needs a Source Form field</h3>
   <p>All applications land in one shared table. Without this field there's no way to know which form a submission came from, or filter by cohort. It's set to <i>"show when empty"</i> so applicants never see it, and gets filled automatically by a prefilled link:</p>
   <div class="tblwrap"><table><tr><td class="mono">https://airtable.com/shrXXXXXX?prefill_Source+Form=Cohort+2</td></tr></table></div>
-  <div class="callout"><span class="icon">⚠️</span><div>Never share the raw form URL. Always use Dima's prefilled link — otherwise <span class="field">Source Form</span> stays empty and the submission can't be traced to a cohort.</div></div>
+  <div class="callout"><span class="icon">⚠️</span><div>Never share the raw form URL. Always use the prefilled link the developer sent — otherwise <span class="field">Source Form</span> stays empty and the submission can't be traced to a cohort.</div></div>
 
   <h3>Step 2 — Get the views ready</h3>
   <div class="note">✅ Fastest path: <b>duplicate the previous cohort's views</b> (right-click each in the sidebar → Duplicate view), then change only the <span class="field">Source Form</span> filter value to the new cohort's name. 10 views total — 7 application-review + 4 engagement (added once the cohort is running).</div>
@@ -426,7 +445,8 @@
       <tr><td><b>Unscored</b></td><td><span class="field">Total Score</span> empty AND <span class="field">Hard Filter Pass</span> ≠ false</td><td>Opened before clicking <span class="btnpill">⚡ Score Applicants</span></td></tr>
       <tr><td><b>Review Scores</b></td><td><span class="field">Total Score</span> filled AND <span class="field">Status</span> empty</td><td>Reading AI Summary, setting Status</td></tr>
       <tr><td><b>Accepted</b></td><td><span class="field">Status</span> = Accepted</td><td>Acceptance emails, tracking engagement</td></tr>
-      <tr><td><b>0-2 years</b> <span class="mono">(special)</span></td><td><span class="field">Years Since Aliyah</span> = "0-2"</td><td>Shajar hand-picks from the recent-olim pool</td></tr>
+      <tr><td><b>0-2 years</b> <span class="mono">(special)</span></td><td><span class="field">Years Since Aliyah</span> = "0-2"</td><td>Hand-pick from the recent-olim pool</td></tr>
+      <tr><td><b>8-10 years</b> <span class="mono">(special)</span></td><td><span class="field">Years Since Aliyah</span> = "8-10"</td><td>Manual review, same as the 0-2 years case — confirm the exact filter value with the developer</td></tr>
       <tr><td><b>Hard No</b></td><td><span class="field">Status</span> = Hard No</td><td>Rejection emails in bulk</td></tr>
       <tr><td><b>Try Again</b></td><td><span class="field">Status</span> = Try Again</td><td>"Try Again" emails, next-cohort review</td></tr>
     </table></div>
@@ -449,8 +469,8 @@
   </ul>
   <p><b>Someone doesn't show up in Survey Responses?</b> They used a different email than their application — see <a href="#s6">Section 6</a> for the manual fix.</p>
 
-  <h3>Step 4 — Notify Dima</h3>
-  <p>Send him: the cohort name, the exact <span class="field">Source Form</span> value, and the expected intake dates. He verifies the scoring script's filters for the new cohort.</p>
+  <h3>Step 4 — Notify the developer</h3>
+  <p>Send: the cohort name, the exact <span class="field">Source Form</span> value, and the expected intake dates — they'll verify the scoring script's filters for the new cohort.</p>
 </section>
 
 <section class="doc" id="s2b">
@@ -494,7 +514,7 @@
     <li>Wait for the confirmation message (added/removed counts). <b>Only then</b> create the Calendar event and invite the group's email (e.g. <code>cohort-1@gayaolim.org</code>) as a guest</li>
   </ol>
 
-  <p><b>Who ends up in a group:</b> only Applications whose Status counts as active — currently Accepted, Alumni, and Late applicants. Ask Dima if a Status needs adding to that list.</p>
+  <p><b>Who ends up in a group:</b> only Applications whose Status counts as active — currently Accepted, Alumni, and Late applicants. Ask the developer if a Status needs adding to that list.</p>
   <div class="note">If the button errors or a group looks wrong — membership can always be fixed by hand in Google Admin Console (Directory → Groups). The next Sync Groups run reconciles against Airtable, it won't fight a manual fix.</div>
 </section>
 
@@ -518,9 +538,9 @@
   <h3>If something goes wrong / manual fallback</h3>
   <ul class="plain">
     <li><b>Registration required, no Zoom account needed</b> — that's expected, name + email only, instantly approved.</li>
-    <li><b>Someone's in the wrong room</b> — the host can always drag anyone between breakout rooms live. Run <code>python3 scripts/reporting/zoom_group_roster.py &lt;event id&gt; &lt;group count&gt;</code> for a plain-text roster to read off.</li>
+    <li><b>Someone's in the wrong room</b> — the host can always drag anyone between breakout rooms live. Ask the developer for a printable roster (who's assigned where) if it's easier to sort people while looking at a list.</li>
     <li><b>Attendance never shows up</b> — if it's been &gt;45 minutes since the meeting ended, click Sync Zoom manually rather than waiting.</li>
-    <li><b>Duplicate meeting</b> — can't happen by design: clicking Create Zoom Meeting on a record that already has one just returns the existing meeting.</li>
+    <li><b>Duplicate meeting</b> — clicking Create Zoom Meeting on a record that already has a tracked meeting just returns the existing one, it never creates a second. If a Zoom link exists but isn't tracked yet (e.g. someone pasted one in by hand), the button will ask for that meeting's ID and attach it instead of making a new one.</li>
   </ul>
 </section>
 
@@ -561,7 +581,7 @@
     <li><b>Open the right list</b> — e.g. "Cohort 2 — Accepted" for acceptance emails, "❌ No RSVP" for a reminder</li>
     <li><b>Choose a template</b> — click <span class="field">📧 Email Template</span> on the records, pick from the dropdown (bulk-editable across a selection)</li>
     <li><b>Send</b> — click <span class="btnpill">📧 Send Selected Emails</span>, wait 30–60 seconds. Only sends where a Template is set and Email Sent isn't checked yet</li>
-    <li><b>Verify</b> — <span class="field">Email Sent</span> checked, Template field cleared, a result like "Sent: 45, Skipped: 2, Errors: 0" appears</li>
+    <li><b>Verify</b> — <span class="field">Email Sent</span> checked, Template field cleared, a result like "Sent: 45, skipped: 2, errors: 0" appears</li>
   </ol>
 
   <div class="tblwrap"><table>
@@ -582,7 +602,7 @@
     <li>The community manager creates it in Brevo's visual editor — no code needed</li>
     <li>Open <b>Email Templates</b> in Airtable</li>
     <li>Click <span class="btnpill">🔄 Sync Brevo Templates</span></li>
-    <li>It appears in the Email Template dropdown, ready to use — Dima not needed</li>
+    <li>It appears in the Email Template dropdown, ready to use — no developer involvement needed</li>
   </ol>
 
   <h3>Important rules</h3>
@@ -654,7 +674,7 @@
     <li>Find records where <span class="field">Participant</span> is empty</li>
     <li>Search Applications by name for each one</li>
     <li>Found them? Update their Email in Applications, link Participant manually</li>
-    <li>Can't find them? Flag for Dima</li>
+    <li>Can't find them? Flag for the developer</li>
   </ol>
   <p class="note">Our sync scripts match by email first — a mismatched email means no RSVP, no emails, and missing from the right views.</p>
 </section>
@@ -665,8 +685,8 @@
   <h3>Emails not sending</h3>
   <ol class="steps">
     <li>Check Brevo — has the 300/day limit been hit?</li>
-    <li>Check <span class="field">Email Sent</span> on the records — maybe already sent?</li>
-    <li>Message Dima: screenshot + what you clicked</li>
+    <li>Look at the record: if <span class="field">Email Sent</span> is checked <b>and</b> <span class="field">📧 Email Template</span> is now empty, it really did send — nothing to do. If <span class="field">Email Sent</span> is checked but the Template field is still filled in, that send actually <b>failed</b> partway through — that's the real signal to act on, not the checkbox alone.</li>
+    <li>Message the developer: screenshot + what you clicked</li>
   </ol>
 
   <h3>Eventbrite sync not working</h3>
@@ -674,7 +694,7 @@
     <li>Confirm the event is "Live", not Draft</li>
     <li>Confirm the Events record has an Eventbrite Event ID</li>
     <li>Wait 5 minutes, try again</li>
-    <li>Message Dima</li>
+    <li>Message the developer</li>
   </ol>
 
   <h3>Scoring stuck (no result after 10 minutes)</h3>
@@ -682,7 +702,7 @@
     <li>Refresh Airtable</li>
     <li>Check "Unscored" — has the count gone down?</li>
     <li>If yes, it's still running, just slow</li>
-    <li>If not, message Dima</li>
+    <li>If not, message the developer</li>
   </ol>
 </section>
 
@@ -708,12 +728,8 @@
 </main>
 </div>
 
-<footer class="contact">
-  <div class="card">
-    <h4>Contact Dima</h4>
-    <p>Email: <a href="mailto:dmitreyvladimirovic@gmail.com">dmitreyvladimirovic@gmail.com</a></p>
-    <p>Response time: within 1 hour, 10:00–19:00 IDT</p>
-  </div>
+<footer class="credit">
+  Built &amp; maintained by Dima
 </footer>
 
 <script>
