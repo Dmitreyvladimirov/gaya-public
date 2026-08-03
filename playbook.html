@@ -310,15 +310,6 @@
   </div>
 
   <div class="card">
-    <h4>Eventbrite</h4>
-    <p><b>What it is:</b> where participants register for some events. They get a link and sign up there.</p>
-    <p><b>Why:</b> registration, QR codes for check-in, automatic confirmation emails.</p>
-    <p><b>Automatic:</b> a registration syncs into Airtable via webhook within 1–2 minutes.</p>
-    <p><b>Who uses it:</b> The team creates events and uses the Eventbrite app for QR check-in on event day.</p>
-    <p><b>Login:</b> eventbrite.com → <code>info@gayaolim.org</code> · <b>Cost:</b> $0 (free events)</p>
-  </div>
-
-  <div class="card">
     <h4>Brevo <span class="mono">— email delivery</span></h4>
     <p><b>What it is:</b> sends designed HTML emails to groups of people at once.</p>
     <p><b>Why:</b> regular Gmail isn't built for bulk sending — it lands in spam, no tracking, no templates. Brevo solves this.</p>
@@ -346,16 +337,24 @@
         <tr><th>Variable</th><th>What it is</th></tr>
         <tr><td class="field">AIRTABLE_TOKEN</td><td>API key to access the Airtable database</td></tr>
         <tr><td class="field">AIRTABLE_BASE_ID</td><td>Address of the specific Airtable base</td></tr>
-        <tr><td class="field">PRIVATE_TOKEN</td><td>API key for Eventbrite</td></tr>
-        <tr><td class="field">EVENTBRITE_ORG_ID</td><td>Gaya's organization ID in Eventbrite</td></tr>
         <tr><td class="field">AIRTABLE_TABLE_ID / _EVENTS_ / _ATTENDANCE_</td><td>Which Airtable table each part of the code reads/writes</td></tr>
         <tr><td class="field">OPENAI_API_KEY</td><td>API key for AI scoring</td></tr>
         <tr><td class="field">BREVO_API_KEY</td><td>API key for email delivery</td></tr>
         <tr><td class="field">TELEGRAM_BOT_TOKEN</td><td>Telegram bot key (alerts to the developer)</td></tr>
         <tr><td class="field">FLASK_SECRET</td><td>The "Railway API Secret" every Airtable button script needs — authenticates button clicks</td></tr>
         <tr><td class="field">ZOOM_*</td><td>Zoom Server-to-Server OAuth credentials</td></tr>
+        <tr><td class="field">PRIVATE_TOKEN</td><td>API key for Eventbrite <span class="mono" style="color:var(--ink-soft)">(legacy)</span></td></tr>
+        <tr><td class="field">EVENTBRITE_ORG_ID</td><td>Gaya's organization ID in Eventbrite <span class="mono" style="color:var(--ink-soft)">(legacy)</span></td></tr>
       </table>
     </div>
+  </div>
+
+  <div class="card">
+    <h4>Eventbrite <span class="badge planned">legacy — not in active use</span></h4>
+    <p><b>What it is:</b> where participants registered for events, before the switch to Calendar-based registration. Still works for any old event that needs it.</p>
+    <p><b>Why it existed:</b> registration, QR codes for check-in, automatic confirmation emails.</p>
+    <p><b>Login:</b> eventbrite.com → <code>info@gayaolim.org</code> · <b>Cost:</b> $0 (free events)</p>
+    <p>See <a href="#s-eventbrite">Eventbrite Sync</a> at the bottom of this page for the manual re-sync steps.</p>
   </div>
 
   <div class="tblwrap">
@@ -363,10 +362,10 @@
       <caption>Cost summary</caption>
       <tr><th>Service</th><th>Who pays</th><th>Cost</th></tr>
       <tr><td>Airtable</td><td>Gaya</td><td>~$20–30/mo</td></tr>
-      <tr><td>Eventbrite</td><td>Gaya</td><td>$0</td></tr>
       <tr><td>Brevo</td><td>Gaya</td><td>$0 (≤300 emails/day)</td></tr>
       <tr><td>OpenAI</td><td>Gaya</td><td>~$1–2/cohort</td></tr>
       <tr><td>Railway</td><td>Developer</td><td>~$5/mo</td></tr>
+      <tr><td>Eventbrite <span class="mono" style="color:var(--ink-soft)">(legacy)</span></td><td>Gaya</td><td>$0</td></tr>
       <tr><td><b>Total</b></td><td></td><td><b>~$25–35/mo</b></td></tr>
     </table>
   </div>
@@ -377,8 +376,8 @@
    AIRTABLE (database)  ←──→  RAILWAY (server)
         ↓                         ↓
   Team clicks a button      Runs AI scoring · sends emails (Brevo)
-  in Airtable                syncs registrations (Eventbrite/Zoom)
-        ↓
+  in Airtable                syncs registrations (Calendar/Zoom;
+        ↓                    legacy: Eventbrite)
   Results appear back in Airtable</p>
 </section>
 
@@ -654,7 +653,7 @@
 
   <h3>Day of event</h3>
   <ul class="checklist">
-    <li>Open the check-in tool (Eventbrite app, or the Check-in URL/QR for Calendar events)</li>
+    <li>Open the check-in tool (the Check-in URL/QR for Calendar events, or the Eventbrite app for legacy Eventbrite-era events)</li>
     <li>Run a manual sync in the morning — confirm data is current</li>
     <li>Print a fallback RSVP list in case there's no internet</li>
   </ul>
@@ -689,14 +688,6 @@
     <li>Message the developer: screenshot + what you clicked</li>
   </ol>
 
-  <h3>Eventbrite sync not working</h3>
-  <ol class="steps">
-    <li>Confirm the event is "Live", not Draft</li>
-    <li>Confirm the Events record has an Eventbrite Event ID</li>
-    <li>Wait 5 minutes, try again</li>
-    <li>Message the developer</li>
-  </ol>
-
   <h3>Scoring stuck (no result after 10 minutes)</h3>
   <ol class="steps">
     <li>Refresh Airtable</li>
@@ -722,6 +713,14 @@
     <li>Click <span class="btnpill">🔄 Sync Eventbrite</span> on that row</li>
     <li>Wait 20–60 seconds</li>
     <li>New registrations appear in <b>Attendance</b>; registered participants get ✅ in <span class="field">Event RSVP</span></li>
+  </ol>
+
+  <h3>If sync isn't working</h3>
+  <ol class="steps">
+    <li>Confirm the event is "Live", not Draft</li>
+    <li>Confirm the Events record has an Eventbrite Event ID</li>
+    <li>Wait 5 minutes, try again</li>
+    <li>Message the developer</li>
   </ol>
 </section>
 
