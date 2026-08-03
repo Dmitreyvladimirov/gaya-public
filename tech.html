@@ -157,6 +157,25 @@
   }
   .path-tree .comment{color:var(--ink-soft)}
 
+  .arch{margin:20px 0 28px}
+  .arch-node{
+    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--shadow); padding:16px 20px;
+  }
+  .arch-label{font-family:'Sora'; font-weight:700; font-size:.98rem; color:var(--sage-deep); display:flex; align-items:center; gap:9px}
+  .arch-sub{font-size:.82rem; color:var(--ink-soft); margin-top:3px; margin-left:18px}
+  .arch-chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:11px; margin-left:18px}
+  .arch-chip{font-family:'JetBrains Mono'; font-size:.76rem; background:var(--sage-tint); color:var(--sage-deep); border-radius:5px; padding:3px 8px}
+  .arch-chip.ext{background:var(--terracotta-tint); color:var(--terracotta)}
+  .arch-dot{width:9px; height:9px; border-radius:50%; flex:none; display:inline-block}
+  .arch-dot.team{background:var(--ink-soft)}
+  .arch-dot.db{background:var(--sage)}
+  .arch-dot.api{background:var(--mustard)}
+  .arch-dot.ext{background:var(--terracotta)}
+  .arch-connector{display:flex; align-items:center; gap:10px; padding:6px 0 6px 24px; color:var(--line)}
+  .arch-connector svg{flex:none}
+  .arch-conn-label{font-family:'JetBrains Mono'; font-size:.76rem; color:var(--ink-soft)}
+
   .badge{
     display:inline-block; font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;
     padding:2px 9px; border-radius:999px; margin-left:8px; vertical-align:middle;
@@ -220,20 +239,49 @@
 <section class="doc" id="t1">
   <h2>Architecture</h2>
   <p>Airtable is the single source of truth the team actually touches. A Flask app on Railway is the automation layer — Airtable buttons call it over HTTP, it talks to Google Calendar/Groups, Zoom, and Brevo, and writes results back into Airtable.</p>
-  <p class="mono" style="white-space:pre-wrap; line-height:1.9; color:var(--ink-soft)">GAYA TEAM (community operations) — works only in Airtable
-        ↕ buttons (Scripting extension) / views / forms
 
-AIRTABLE (single source of truth)
-  Tables: Applications, Events, Attendance, Survey Responses, Email Templates
-        ↕ HTTPS, Bearer FLASK_SECRET
+  <div class="arch">
+    <div class="arch-node">
+      <div class="arch-label"><span class="arch-dot team"></span>Gaya Team — community operations</div>
+      <div class="arch-sub">Works only inside Airtable</div>
+    </div>
 
-RAILWAY — "Gaya API" service (Flask, app/gaya_bot.py)
-  Routes: /score-applicants · /sync-calendar · /sync-groups ·
-          /create-zoom-meeting · /sync-zoom-rooms · /sync-zoom-attendance ·
-          /zoom-webhook/&lt;secret&gt; · /sync-brevo-templates · /send-email ·
-          /checkin/&lt;id&gt; · /qr/&lt;id&gt; · /health
-        ↕
-  Google Calendar/Groups API · Zoom API (+ webhook) · Brevo API · OpenAI API</p>
+    <div class="arch-connector">
+      <svg width="16" height="30" viewBox="0 0 16 30" aria-hidden="true"><path d="M8 1 V23 M2 17 L8 25 L14 17" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="arch-conn-label">buttons (Scripting extension) · views · forms</span>
+    </div>
+
+    <div class="arch-node">
+      <div class="arch-label"><span class="arch-dot db"></span>Airtable — single source of truth</div>
+      <div class="arch-chips">
+        <span class="arch-chip">Applications</span><span class="arch-chip">Events</span><span class="arch-chip">Attendance</span><span class="arch-chip">Survey Responses</span><span class="arch-chip">Email Templates</span>
+      </div>
+    </div>
+
+    <div class="arch-connector">
+      <svg width="16" height="30" viewBox="0 0 16 30" aria-hidden="true"><path d="M8 1 V23 M2 17 L8 25 L14 17" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="arch-conn-label">HTTPS · Bearer FLASK_SECRET</span>
+    </div>
+
+    <div class="arch-node">
+      <div class="arch-label"><span class="arch-dot api"></span>Railway — "Gaya API" (Flask, app/gaya_bot.py)</div>
+      <div class="arch-chips">
+        <span class="arch-chip">/score-applicants</span><span class="arch-chip">/sync-calendar</span><span class="arch-chip">/sync-groups</span><span class="arch-chip">/create-zoom-meeting</span><span class="arch-chip">/sync-zoom-rooms</span><span class="arch-chip">/sync-zoom-attendance</span><span class="arch-chip">/zoom-webhook/&lt;secret&gt;</span><span class="arch-chip">/sync-brevo-templates</span><span class="arch-chip">/send-email</span><span class="arch-chip">/checkin/&lt;id&gt;</span><span class="arch-chip">/qr/&lt;id&gt;</span><span class="arch-chip">/health</span>
+      </div>
+    </div>
+
+    <div class="arch-connector">
+      <svg width="16" height="30" viewBox="0 0 16 30" aria-hidden="true"><path d="M8 1 V23 M2 17 L8 25 L14 17" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+
+    <div class="arch-node">
+      <div class="arch-label"><span class="arch-dot ext"></span>External services</div>
+      <div class="arch-chips">
+        <span class="arch-chip ext">Google Calendar/Groups API</span><span class="arch-chip ext">Zoom API (+ webhook)</span><span class="arch-chip ext">Brevo API</span><span class="arch-chip ext">OpenAI API</span>
+      </div>
+    </div>
+  </div>
+
   <p>Buttons in Airtable are <b>Scripting extension</b> scripts, not Automation "Run a script" steps — the two have different runtimes (no Secrets vault in Scripting, no "record that was clicked" binding, `output.text()` vs `console.log()`). See <span class="field">integrations/airtable/*.js</span> for the actual scripts.</p>
 </section>
 
@@ -261,7 +309,7 @@ docs/
   index.html          <span class="comment"># → published as playbook.html on gaya-public</span>
   tech.html            <span class="comment"># → published as tech.html on gaya-public (this page)</span>
   operations/          <span class="comment"># WORKLOG.md, PLAYBOOK.md, KNOWN_ISSUES.md</span>
-  product/             <span class="comment"># ROADMAP.md, STATUS.md, ZOOM_SPEC.md, ZOOM_PLAN.md</span></div>
+  product/             <span class="comment"># ROADMAP.md -- single roadmap + status doc (merged 2026-08-03)</span></div>
 </section>
 
 <section class="doc" id="t3">
@@ -371,7 +419,7 @@ gh api repos/Dmitreyvladimirov/gaya-public/contents/tech.html -X PUT \
   </div>
 
   <h3>Already done, despite what an older doc might say</h3>
-  <div class="note">Worth a quick note here so nobody re-does this work: a code-vs-docs audit (2026-08-03) found two places where <code>WORKLOG.md</code>/<code>STATUS.md</code> had gone stale in the "still open" direction.</div>
+  <div class="note">Worth a quick note here so nobody re-does this work: a code-vs-docs audit (2026-08-03) found two places where <code>WORKLOG.md</code>/<code>ROADMAP.md</code> had gone stale in the "still open" direction.</div>
   <ul class="plain">
     <li><b>Recurring Zoom meetings, webhook disambiguation (Task 19)</b> — a WORKLOG entry said this was "not built yet"; it actually was, the same day. <span class="field">_find_at_event_by_zoom_meeting_id</span> in <code>app/gaya_bot.py</code> resolves multiple Events records sharing one Zoom meeting ID by closest <span class="field">Date</span> to the webhook's occurrence time, tested in <code>test_zoom_webhook.py</code>.</li>
     <li><b>Cohort → Google Group daily sync</b> — this exists and runs live, but it's an <b>Airtable-native Automation</b> (cron trigger, daily 8:00 Asia/Jerusalem, a <span class="field">customScript</span> node) configured directly in Airtable, not code in this repo — easy to miss if you only search <code>gaya-automation</code>'s source. Confirmed via Airtable's own Automations API, deployment status "deployed".</li>
@@ -385,9 +433,8 @@ gh api repos/Dmitreyvladimirov/gaya-public/contents/tech.html -X PUT \
     <tr><th>Question</th><th>Where</th></tr>
     <tr><td>What happened, day by day?</td><td><code>docs/operations/WORKLOG.md</code></td></tr>
     <tr><td>Non-critical bugs/questions found but not fixed?</td><td><code>docs/operations/KNOWN_ISSUES.md</code></td></tr>
-    <tr><td>What's blocking right now?</td><td><code>docs/product/STATUS.md</code></td></tr>
-    <tr><td>Full phased delivery status?</td><td><code>docs/product/ROADMAP.md</code></td></tr>
-    <tr><td>Zoom integration design + decisions?</td><td><code>docs/product/ZOOM_SPEC.md</code>, <code>ZOOM_PLAN.md</code></td></tr>
+    <tr><td>What's blocking right now, and full phased delivery status?</td><td><code>docs/product/ROADMAP.md</code> — single roadmap + status doc (merged 2026-08-03 from the old ROADMAP/STATUS/ZOOM_SPEC/ZOOM_PLAN split)</td></tr>
+    <tr><td>Zoom integration design + decisions?</td><td>"Zoom integration" section of <code>docs/product/ROADMAP.md</code></td></tr>
   </table></div>
 </section>
 
